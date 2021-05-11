@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Create the specified feature (f_*) branch ($1);
+# Create the specified feature (fb_*/f_*) branch ($1);
 # Go to the created feature branch;
 # Add and commit all changes;
 # Log the specified commit message ($2);
