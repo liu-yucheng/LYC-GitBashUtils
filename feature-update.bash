@@ -8,9 +8,9 @@
 # Delete the created feature branch.
 
 if [[ $# -ne 2 ]]; then
-    printf '%s' "Usage: ${0##*/} {feature branch name} " \
+    printf "%s" "Usage: ${0##*/} {feature branch name} " \
         "{feature commit message}"
-    printf '\n'
+    printf "\n"
     exit 1
 fi
 

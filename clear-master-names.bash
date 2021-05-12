@@ -8,17 +8,18 @@ if [[ $# -ne 0 ]]; then
     exit 1
 fi
 
-starting_comment='# Use the first non-comment line as the current master name'
-master_names=(
-    "${starting_comment}"
-    master
-)
-printf "%s\n" "${master_names[@]}" > "${0%/*}/master-names.txt"
+master_names_fname="${0%/*}/master-names.txt"
+
+master_names=()
+master_names[0]="# Use the first non-comment line as the current master name"
+master_names[1]="master"
+
+printf "%s\n" "${master_names[@]}" > "${master_names_fname}"
 
 (
     # Turn command tracing on
     set -o xtrace
 
-    cat "${0%/*}/master-names.txt"
+    cat "${master_names_fname}"
     git branch
 )
