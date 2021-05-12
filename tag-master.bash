@@ -9,8 +9,6 @@ if [[ $# -ne 1 ]]; then
     exit 1
 fi
 
-master=master
-
 master_names=()
 while IFS= read -r line || [ -n "${line}" ]; do
     line=$(echo ${line} | tr -d '\n\r')
@@ -19,6 +17,7 @@ while IFS= read -r line || [ -n "${line}" ]; do
     fi
 done < "${0%/*}/master-names.txt"
 
+master=master
 if [ -n "${master_names[0]}" ]; then
     master=${master_names[0]}
 fi
