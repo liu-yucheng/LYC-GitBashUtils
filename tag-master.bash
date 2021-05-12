@@ -10,9 +10,9 @@ if [[ $# -ne 1 ]]; then
 fi
 
 master_names=()
-while IFS= read -r line || [ -n "${line}" ]; do
-    line=$(echo ${line} | tr -d '\n\r')
-    if [ "${line:0:1}" != "#" ]; then
+while IFS= read -r line || [[ -n "${line}" ]]; do
+    line=$(echo "${line}" | tr -d "\n\r")
+    if [[ "${line:0:1}" != "#" ]]; then
         master_names+=("${line}")
     fi
 done < "${0%/*}/master-names.txt"
