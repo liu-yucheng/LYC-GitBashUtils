@@ -16,5 +16,5 @@ fi
     # Turn command tracing on
     set -o xtrace
 
-    git push ${remote} '*:*'
+    git push ${remote} "*:*"
 )
