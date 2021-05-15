@@ -18,6 +18,7 @@ fi
     # Turn command tracing on
     set -o xtrace
 
+    git branch dev
     git branch $1
     git checkout $1
     git add -A
