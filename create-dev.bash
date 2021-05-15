@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Create a development (dev) branch;
-# Go to the development branch
+# Go to the development branch.
 
 if [[ $# -ne 0 ]]; then
     echo "Usage: ${0##*/}"

@@ -2,7 +2,7 @@
 
 # Go to the master branch;
 # Merge the development (dev) branch;
-# Go back to the development branch
+# Go back to the development branch.
 
 if [[ $# -ne 0 ]]; then
     echo "Usage: ${0##*/}"
