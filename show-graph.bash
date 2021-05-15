@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Show git branch graph (command line simplified version)
+# Show git branch graph (command line simplified version).
 
 if [[ $# -ne 0 ]]; then
     echo "Usage: ${0##*/}"
