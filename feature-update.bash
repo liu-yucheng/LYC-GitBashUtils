@@ -1,16 +1,14 @@
 #! /bin/bash
 
-# Create the specified feature (fb_*/f_*) branch ($1);
-# Go to the created feature branch;
-# Add and commit all changes;
-# Log the specified commit message ($2);
-# Go back to the development (dev) branch;
-# Delete the created feature branch.
+# Create the specified feature (fb_*/f_*) branch ($1)
+# Go to the created feature branch
+# Add and commit all changes
+# Log the specified commit message ($2)
+# Go back to the development (dev) branch
+# Delete the created feature branch
 
 if [[ $# -ne 2 ]]; then
-    printf "%s" "Usage: ${0##*/} {feature branch name} " \
-        "{feature commit message}"
-    printf "\n"
+    printf "%s\n" "Usage: ${0##*/} <feature branch name> <feature commit message>"
     exit 1
 fi
 
