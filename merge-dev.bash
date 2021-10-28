@@ -9,13 +9,15 @@ if [[ $# -ne 0 ]]; then
     exit 1
 fi
 
+main_names_loc="${0%/*}/main-names.txt"
+
 main_names=()
 while IFS= read -r line || [[ -n "${line}" ]]; do
     line=$(echo "${line}" | tr -d "\n\r")
     if [[ "${line:0:1}" != "#" ]]; then
         main_names+=("${line}")
     fi
-done < "${0%/*}/main-names.txt"
+done < "${main_names_loc}"
 
 main="main"
 if [[ -n "${main_names[0]}" ]]; then
