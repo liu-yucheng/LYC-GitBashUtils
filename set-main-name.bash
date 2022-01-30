@@ -1,5 +1,8 @@
 #! /bin/bash
 
+# Copyright 2022 Yucheng Liu. GNU GPL3 license.
+# GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
+
 # Change the main branch name (in main-names.txt)
 # Add the specified name ($1) to the record (in main-names.txt)
 # Ensure that the record has no duplicate elements
