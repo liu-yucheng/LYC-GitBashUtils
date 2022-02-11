@@ -1,0 +1,7 @@
+# Default ignored file name pattern
+**/.*/
+
+# Project specific ignored files
+**/.vscode/
+**/.lyc-git-bash-utils-app-data
+**/.lyc-git-bash-utils-test-data
