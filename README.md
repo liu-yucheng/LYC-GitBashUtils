@@ -3,28 +3,59 @@ Copyright 2022 Yucheng Liu. GNU GPL3 lincense.
 GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
 --->
 
-# MyGitUtils
-The Git utility (util) bash scripts I write for software engineering purposes.
+# LYC-GitBashUtils
 
-These scripts saves me from repeatedly and endlessly typing `git ...` on my terminal (emulator).
+A Git Bash utility application I write for software engineering purposes.
+
+Properly updating a multi-branch Git repository typically requires dozens of Git Bash commands or dozens of clicks on the Git GUI.
+
+I write this application with the hope that it can save the users from endlessly and repeatedly typing series of Git Bash commands or clicking on certain elements of the Git GUI when updating their repositories.
+
+In many of my projects, this application saved me the time to enter multiple Git Bash commands on my terminals.
+
+It also saved me the time to think about the right command combination to use when updating my repositories.
+
+It lets me focus on the software codes to update and gives me a better software developing experience.
+
+This application, formerly an utility collection, manages to **control the version of itself** in a Git Bash environment since version `0.2.2`.
 
 # Important Notes
 
-Please **be careful** when using these scripts, because they contain **batch/bulk git operations**.
+This utility collection contains potentially **batch and bulk `git` operations**.
 
-**Checking `git status`** is strongly recommended before running the scripts.
+I strongly recommend you to **run and check `git status` and `git log`** before running the commands in this app.
 
-## How to Start
+# Installation
 
-1. Download the source or clone the repository.
+- Download the source code.
+- Install the app. (Optional. See below.)
+- Run the app in the following ways.
 
-2. Run the bash scripts when needed.
+## `~/.bash_profile` Installation
 
-## Instructions on Usage
+- I recommend you to install the app in this way.
+- Go to the root directory of this repository
+- Run the `./install.bash` command
+- Upon uninstallation, remember to run the `./uninstall.bash` command
+- Run `gbu` and its sub-commands from a GNU Bash shell.
 
-The instructions are written as echo statements and comments inside the scripts.
+## Direct Script Execution
 
-A fancier version of the instructions can possibly get updated later.
+- You can run the app in this way, without a `~/.bash_profile` installation.
+- Directly run the Bash scripts in the `lyc-git-bash-utils/exes` folder of this repository.
+- You can make a shortcut to the `exes` folder at somewhere you like to get access to the scripts more easily.
+
+# Usage (From a GNU Bash shell with `git`)
+
+`gbu`:
+
+The main command and entry to the sub-commands.
+Short for `Git Bash Utilities`.
+
+`gbu help`:
+
+The help subcommand.
+Shows detailed help information.
 
 # Miscellaneous
 ## Versioning
@@ -58,6 +89,16 @@ The corresponding version tag would be:
 The version tags are on the main branch.
 ```
 
+## Developer's Notes
+
+This app is distributed under the **GNU GPL3 license**.
+
+The works that **contains or integrates any part of this app must also be distributed under the GNU GPL3 license**.
+
+The works that are managed using this utility collection do not have to be distributed under the GNU GPL3 license.
+
+However, if you find this utility collection useful, I encourage you to also distribute a selection your works under the GNU GPL3 license as your contribution to the open-source community.
+
 ## Copyright
 ### Short Version
 
@@ -71,7 +112,7 @@ You should have and keep a copy of the above license. If not, please get it
 ### Long Version
 
 ```text
-MyGitUtils, Yucheng Liu's personal Git Bash utility collection.
+LYC-GitBashUtils, LYC's personal Git Bash utility application.
 Copyright (C) 2022 Yucheng Liu. GNU GPL3 license (GNU General Public License
   Version 3).
 
@@ -91,4 +132,3 @@ You should have received a copy of the GNU General Public License along with
   2. https://www.gnu.org/licenses/.
   3. https://www.gnu.org/licenses/gpl-3.0.txt.
 ```
-
