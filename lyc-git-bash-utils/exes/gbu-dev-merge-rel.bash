@@ -1,14 +1,10 @@
 #! /bin/bash
 
-# "gbu init-repo" command executable.
+# "gbu dev-merge-rel" command executable.
 #
-# Can be executed directly.
-# Runs "git init" in the current repository.
-# Creates an empty README.md file in the repository.
-# Runs "git add" on the README.md file.
-# Makes an initial commit in the current repository.
-# Invokes the "gbu create-rel" command executable.
-# Invokes the "gbu create-dev" command executable.
+# Goes to the dev branch.
+# Merges the rel branch.
+# Goes back to the rel branch.
 
 # Copyright 2022 Yucheng Liu. GNU GPL3 license.
 # GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
@@ -27,7 +23,7 @@ if [[ -z $_gbu_incl_exes ]]; then
 fi
 
 __main() {
-    local brief_usage="gbu init-repo"
+    local brief_usage="gbu dev-merge-rel"
     local few_args_fmt="\"$brief_usage\" gets too few arguments\nExpects 0 arguments; Gets %s arguments\n"
     local usage="Usage: $brief_usage\nHelp: gbu help"
     local many_args_fmt="\"$brief_usage\" gets too many arguments\nExpects 0 arguments; Gets %s arguments\n"
@@ -40,23 +36,12 @@ __main() {
         (
             set -o xtrace # Turn command tracing on
 
-            git init
+            git checkout dev
+            git merge rel --no-ff -m "dev branch merged rel branch"
+            git checkout rel
+            git branch
         )
 
-        git log >|/dev/null 2>&1
-
-        if [[ $? -ne 0 ]]; then
-            (
-                set -o xtrace # Turn command tracing on
-
-                touch ./README.md
-                git add ./README.md
-                git commit -m "Initial commit; Added README"
-            )
-        fi
-
-        $__dir/gbu-create-rel.bash
-        $__dir/gbu-create-dev.bash
         exit 0
     else
         printf "$many_args_fmt" "$#" >|/dev/stderr
