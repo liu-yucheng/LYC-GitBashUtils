@@ -2,8 +2,8 @@
 
 # "gbu update-feature" command executable.
 #
+# Invokes the "gbu dev-merge-rel" executable.
 # Goes to the dev branch.
-# Merges the rel branch.
 # Creates a feature branch called $1.
 # Goes to the feature branch.
 # Adds and commits all changes.
@@ -41,11 +41,12 @@ __main() {
         echo -e "$usage" >|/dev/stderr
         exit 1
     elif [[ $# -eq 2 ]]; then
+        $__dir/gbu-dev-merge-rel.bash
+
         (
             set -o xtrace # Turn command tracing on
 
             git checkout dev
-            git merge rel --no-ff -m "dev branch merged rel branch"
             git branch $1
             git checkout $1
             git add -A
