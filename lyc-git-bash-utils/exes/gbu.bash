@@ -62,6 +62,11 @@ __main() {
             $__dir/gbu-create-rel.bash "${subcmd_arg_list[@]}"
             exit 0
             ;;
+        dev-merge-rel)
+            # echo "subcommand dev-merge-rel" # Debug
+            $__dir/gbu-dev-merge-rel.bash "${subcmd_arg_list[@]}"
+            exit 0
+            ;;
         help)
             # echo "subcommand help" # Debug
             $__dir/gbu-help.bash "${subcmd_arg_list[@]}"
