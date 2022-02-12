@@ -34,9 +34,9 @@ I strongly recommend you to **run and check `git status` and `git log`** before 
 ## `~/.bash_profile` Installation
 
 - I recommend you to install the app in this way.
-- Go to the root directory of this repository
-- Run the `./install.bash` command
-- Upon uninstallation, remember to run the `./uninstall.bash` command
+- Go to the root directory of this repository.
+- Run the `./install.bash` command.
+- Upon uninstallation, remember to run the `./uninstall.bash` command.
 - Run `gbu` and its sub-commands from a GNU Bash shell.
 
 ## Direct Script Execution
