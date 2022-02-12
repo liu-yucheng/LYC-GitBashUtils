@@ -41,10 +41,19 @@ __main() {
             set -o xtrace # Turn command tracing on
 
             git init
-            touch ./README.md
-            git add ./README.md
-            git commit -m "Initial commit; Added README"
         )
+
+        git log >|/dev/null 2>&1
+
+        if [[ $? -ne 0 ]]; then
+            (
+                set -o xtrace # Turn command tracing on
+
+                touch ./README.md
+                git add ./README.md
+                git commit -m "Initial commit; Added README"
+            )
+        fi
 
         $__dir/gbu-create-rel.bash
         $__dir/gbu-create-dev.bash
