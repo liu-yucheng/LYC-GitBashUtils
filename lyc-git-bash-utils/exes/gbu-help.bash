@@ -69,6 +69,9 @@ create-dev:
 init-repo:
     When:   You need to initialize the current repository.
     How-to: gbu init-repo
+dev-merge-rel:
+    When:   You need the dev branch to merge the rel branch.
+    How-to: gbu dev-merge-rel
 update-feature:
     When:   You need to update a feature with a feature branch.
     How-to: gbu update-feature <feature-branch-name> <feature-commit-message>
@@ -96,7 +99,7 @@ pull-updates:
 __eof
         )
 
-        echo -e "$help"
+        echo -e "$help" | less --quit-if-one-screen --no-init
         exit 0
     else
         printf "$many_args_fmt" "$#" >|/dev/stderr
