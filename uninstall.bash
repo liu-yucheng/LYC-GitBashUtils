@@ -51,7 +51,7 @@ __cleanup_profile() {
 
     while [[ 1 ]]; do
         local line
-        read line
+        read -r line
 
         if [[ $? -ne 0 ]]; then
             break
@@ -106,7 +106,7 @@ __cleanup_rc() {
 
     while [[ 1 ]]; do
         local line
-        read line
+        read -r line
 
         if [[ $? -ne 0 ]]; then
             break
@@ -149,7 +149,7 @@ __restore_pkg_perm() {
     (
         set -o xtrace # Turn command tracing on
 
-        chmod $pkg_perm $_gbu_pkg_path
+        chmod --recursive $pkg_perm $_gbu_pkg_path
     )
 
     # echo "Restored package permission"
