@@ -31,17 +31,18 @@ I strongly recommend you to **run and check `git status` and `git log`** before 
 - Install the app. (Optional. See below.)
 - Run the app in the following ways.
 
-## `~/.bash_profile` Installation
+## Bash Environment Installation
 
 - I recommend you to install the app in this way.
 - Go to the root directory of this repository.
 - Run the `./install.bash` command.
+- This will install the application to `~/.bash_profile` and `~/.bashrc`.
 - Upon uninstallation, remember to run the `./uninstall.bash` command.
 - Run `gbu` and its sub-commands from a GNU Bash shell.
 
 ## Direct Script Execution
 
-- You can run the app in this way, without a `~/.bash_profile` installation.
+- You can run the app in this way without a Bash environment installation.
 - Directly run the Bash scripts in the `lyc-git-bash-utils/exes` folder of this repository.
 - You can make a shortcut to the `exes` folder at somewhere you like to get access to the scripts more easily.
 
