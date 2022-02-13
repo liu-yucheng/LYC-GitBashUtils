@@ -24,14 +24,21 @@ fi
 # Repository path
 _gbu_repo_path=$(realpath $__dir/../..)
 
+# Package path
+_gbu_pkg_path=$_gbu_repo_path/lyc-git-bash-utils
+
 # Default configs path.
 _gbu_dft_cfgs_path=$_gbu_repo_path/lyc-git-bash-utils-default-configs
 # Default app data path.
 _gbu_dft_app_data_path=$_gbu_dft_cfgs_path/app-data
 # Default main names location.
 _gbu_dft_main_names_loc=$_gbu_dft_app_data_path/main-branch-names.txt
+# Default package permissions location.
+_gbu_dft_pkg_perms_loc=$_gbu_dft_app_data_path/package-permissions.txt
 
 # App data path.
 _gbu_app_data_path=$_gbu_repo_path/.lyc-git-bash-utils-app-data
 # Main names location.
 _gbu_main_names_loc=$_gbu_app_data_path/main-branch-names.txt
+# Package permission location.
+_gbu_pkg_perms_loc=$_gbu_app_data_path/package-permissions.txt
