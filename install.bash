@@ -58,7 +58,7 @@ __ensure_profile() {
 
     while [[ 1 ]]; do
         local line
-        read line
+        read -r line
 
         if [[ $? -ne 0 ]]; then
             break
@@ -125,7 +125,7 @@ __ensure_rc() {
 
     while [[ 1 ]]; do
         local line
-        read line
+        read -r line
 
         if [[ $? -ne 0 ]]; then
             break
@@ -180,7 +180,7 @@ __ensure_pkg_perms() {
     (
         set -o xtrace # Turn command tracing on
 
-        chmod 755 $_gbu_pkg_path
+        chmod --recursive 755 $_gbu_pkg_path
     )
 
     # echo "Ensured package permissions"
