@@ -64,7 +64,7 @@ create-rel:
     When:   You need to create a rel (release) branch.
     How-to: gbu create-rel
 create-dev:
-    When:   You need to create a dev (develop) branch.
+    When:   You need to create a dev (development) branch.
     How-to: gbu create-dev
 init-repo:
     When:   You need to initialize the current repository.
