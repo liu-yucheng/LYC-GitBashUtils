@@ -19,21 +19,21 @@ It lets me focus on the software codes to update and gives me a better software 
 
 This application, formerly an utility collection, manages to **control the version of itself** in a Git Bash environment since version `0.2.2`.
 
-# Important Notes
+# Notes On `git` Operations
 
-This utility collection contains potentially **batch and bulk `git` operations**.
+This application contains commands that have **batch `git` operations**.
 
-I strongly recommend you to **run and check `git status` and `git log`** before running the commands in this app.
+I recommend you to **run and check `git status` and `git log`** before running commands provided by this application.
 
 # Installation
 
 - Download the source code.
-- Install the app. (Optional. See below.)
-- Run the app in the following ways.
+- Install the application. (Optional. See below.)
+- Run the application in the following ways.
 
 ## Bash Environment Installation
 
-- I recommend you to install the app in this way.
+- I recommend you to install the application in this way.
 - Go to the root directory of this repository.
 - Run the `./install.bash` command.
 - This will install the application to `~/.bash_profile` and `~/.bashrc`.
@@ -42,7 +42,7 @@ I strongly recommend you to **run and check `git status` and `git log`** before 
 
 ## Direct Script Execution
 
-- You can run the app in this way without a Bash environment installation.
+- You can run the application in this way without a Bash environment installation.
 - Directly run the Bash scripts in the `lyc-git-bash-utils/exes` folder of this repository.
 - You can make a shortcut to the `exes` folder at somewhere you like to get access to the scripts more easily.
 
@@ -138,25 +138,50 @@ pull-updates:
 ```
 
 # Miscellaneous
-## Versioning
+## Developer's Notes :memo: and Warnings :warning:
+### Notes :memo:
+
+This application is distributed under the **GNU GPL3 license**.
+
+A subsequent work of this application is a work that satisfies **any one** of the following:
+   - Is a variant of any form this application.
+   - Contains a part, some parts, or all parts of this application.
+   - Integrates a part, some parts, or all parts of this application.
+
+All subsequent works of this application **must also be distributed under the GNU GPL3 license, and must also open their source codes to the public**.
+
+The works whose versions are managed by this application do not have to be distributed under the GNU GPL3 license.
+
+However, if you find this application useful, I encourage you to also distribute a selection your works under the GNU GPL3 license as your contribution to the open-source community.
+
+### Warnings :warning:
+
+Making a **closed-source** subsequent work (as defined above) of this application, and distribute it to the public is **unlawful**, no matter if such work makes a profit.
+
+Doing so may result in severe civil and criminal penalties.
+
+I reserve the rights, funds, time, and efforts to prosecute those who violate the license of this application to the maximum extent under applicable laws.
+
+## Versions
+### Versioning
 
 ```text
-The versioning of this app is based on Semantic Versioning.
+The versioning of this application is based on Semantic Versioning.
 You can see the complete Semantic Versioning specification from
   https://semver.org/.
-Basically, the version name of this app is in the form of:
+Basically, the version name of this application is in the form of:
   x.y.z
   Where x, y, and z are integers that are greater than or equal to 0.
   Where x, y, and z are separated by dots.
   x stands for the major version and indicates non-compatible major changes to
-    the app.
+    the application.
   y stands for the minor version and indicates forward compatible minor
-    changes to the app.
+    changes to the application.
   z stands for the patch version and indicates bug fixes and patches to the
-    app.
+    application.
 ```
 
-## Version Tags
+### Version Tags
 
 ```text
 The version tags of this repo has the form of a letter "v" followed by a
@@ -168,16 +193,6 @@ The corresponding version tag would be:
   v$x.$y.$z
 The version tags are on the main branch.
 ```
-
-## Developer's Notes
-
-This app is distributed under the **GNU GPL3 license**.
-
-The works that **contains or integrates any part of this app must also be distributed under the GNU GPL3 license**.
-
-The works that are managed using this utility collection do not have to be distributed under the GNU GPL3 license.
-
-However, if you find this utility collection useful, I encourage you to also distribute a selection your works under the GNU GPL3 license as your contribution to the open-source community.
 
 ## Copyright
 ### Short Version
