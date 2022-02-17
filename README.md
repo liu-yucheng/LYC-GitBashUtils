@@ -184,7 +184,7 @@ Basically, the version name of this application is in the form of:
 ### Version Tags
 
 ```text
-The version tags of this repo has the form of a letter "v" followed by a
+The version tags of this repository has the form of a letter "v" followed by a
   semantic version.
 Given a semantic version:
   $x.$y.$z
