@@ -68,7 +68,7 @@ I am continuously refining this model as I am updating this application.
 
 A flowchart of the current `gbu` branching model is attached as an SVG image below.
 
-![GBU-Branching-Model.svg](README-Assets/GBU-Branching-Model.svg)
+![GBU-Branching-Model-White-BG.svg](README-Assets/GBU-Branching-Model-White-BG.svg)
 
 # `gbu help` Help Page
 ```bash
