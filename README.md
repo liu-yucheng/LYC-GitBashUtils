@@ -150,7 +150,7 @@ A subsequent work of this application is a work that satisfies **any one** of th
 
 All subsequent works of this application **must also be distributed under the GNU GPL3 license, and must also open their source codes to the public**.
 
-The works whose versions are managed by this application do not have to be distributed under the GNU GPL3 license.
+The non-subsequent works whose versions are managed by this application do not have to be distributed under the GNU GPL3 license.
 
 However, if you find this application useful, I encourage you to also distribute a selection your works under the GNU GPL3 license as your contribution to the open-source community.
 
