@@ -138,7 +138,7 @@ pull-updates:
 ```
 
 # Miscellaneous
-## Developer's Notes :memo: and Warnings :warning:
+## Developer's Notes :memo: And Warnings :warning:
 ### Notes :memo:
 
 This application is distributed under the **GNU GPL3 license**.
