@@ -144,7 +144,7 @@ pull-updates:
 This application is distributed under the **GNU GPL3 license**.
 
 A subsequent work of this application is a work that satisfies **any one** of the following:
-   - Is a variant of any form this application.
+   - Is a variant of any form of this application.
    - Contains a part, some parts, or all parts of this application.
    - Integrates a part, some parts, or all parts of this application.
 
