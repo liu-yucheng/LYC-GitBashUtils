@@ -35,7 +35,7 @@ __main() {
         (
             set -o xtrace # Turn command tracing on
 
-            git log --all --decorate --oneline --graph
+            git log --all --decorate --oneline --graph --date-order
         )
 
         exit 0
