@@ -1,8 +1,8 @@
 #! /bin/bash
 
-# "gbu merge-updates" command executable.
+# "gbu merge-rel-updates" command executable.
 #
-# Invokes the "gbu rel-merge-dev" command executable.
+# Invokes the "gbu dev-merge-rel" command executable.
 # Invokes the "gbu main-merge-rel" command executable.
 
 # Copyright 2022 Yucheng Liu. GNU GPL3 license.
@@ -22,7 +22,7 @@ if [[ -z $_gbu_incl_exes ]]; then
 fi
 
 __main() {
-    local brief_usage="gbu merge-updates"
+    local brief_usage="gbu merge-rel-updates"
     local few_args_fmt="\"$brief_usage\" gets too few arguments\nExpects 0 arguments; Gets %s arguments\n"
     local usage="Usage: $brief_usage\nHelp: gbu help"
     local many_args_fmt="\"$brief_usage\" gets too many arguments\nExpects 0 arguments; Gets %s arguments\n"
@@ -32,7 +32,7 @@ __main() {
         echo -e "$usage" >|/dev/stderr
         exit 1
     elif [[ $# -eq 0 ]]; then
-        $__dir/gbu-rel-merge-dev.bash
+        $__dir/gbu-dev-merge-rel.bash
         $__dir/gbu-main-merge-rel.bash
         exit 0
     else
