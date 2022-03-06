@@ -123,9 +123,12 @@ update-patch:
 main-merge-rel:
     When:   You need the main branch to merge the rel branch.
     How-to: gbu main-merge-rel
-merge-updates:
+merge-dev-updates:
     When:   You need rel to merge dev, and then main to merge rel.
-    How-to: gbu merge-updates
+    How-to: gbu merge-dev-updates
+merge-rel-updates:
+    When:   You need dev to merge rel, and then main to merge rel.
+    How-to: gbu merge-rel-updates
 tag-main:
     When:   You need to tag the latest commit on the main branch.
     How-to: gbu tag-main <tag-name>
