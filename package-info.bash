@@ -11,7 +11,7 @@ _gbu_incl_package_info=1
 # Name.
 _gbu_name=lyc-git-bash-utils
 # Version.
-_gbu_ver=0.8.0
+_gbu_ver=0.8.1
 # Description.
 _gbu_desc="LYC's personal Git Bash utility application."
 # Author.
