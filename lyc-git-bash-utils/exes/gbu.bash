@@ -97,9 +97,14 @@ __main() {
             $__dir/gbu-main-merge-rel.bash "${subcmd_arg_list[@]}"
             exit 0
             ;;
-        merge-updates)
-            # echo "subcommand merge-updates" # Debug
-            $__dir/gbu-merge-updates.bash "${subcmd_arg_list[@]}"
+        merge-dev-updates)
+            # echo "subcommand merge-dev-updates" # Debug
+            $__dir/gbu-merge-dev-updates.bash "${subcmd_arg_list[@]}"
+            exit 0
+            ;;
+        merge-rel-updates)
+            # echo "subcommand merge-rel-updates" # Debug
+            $__dir/gbu-merge-rel-updates.bash "${subcmd_arg_list[@]}"
             exit 0
             ;;
         pull-updates)

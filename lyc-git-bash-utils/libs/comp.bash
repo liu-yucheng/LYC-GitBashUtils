@@ -27,8 +27,8 @@ __comp() {
     fi
 
     local gbu_cmds="clear-main-names create-dev create-rel dev-merge-rel help info init-repo list-main-names \
-        list-user-info main-merge-rel merge-updates pull-updates push-updates rel-merge-dev set-main-name \
-        set-user-info show-graph tag-main update-feature update-patch"
+        list-user-info main-merge-rel merge-dev-updates merge-rel-updates pull-updates push-updates rel-merge-dev \
+        set-main-name set-user-info show-graph tag-main update-feature update-patch"
 
     complete -o default -W "$gbu_cmds" gbu
 }
