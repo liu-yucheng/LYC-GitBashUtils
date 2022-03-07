@@ -41,7 +41,8 @@ __main() {
         (
             set -o xtrace # Turn command tracing on
 
-            git push $remote_name "*:*"
+            git push --all $remote_name
+            git push --tags $remote_name
         )
 
         exit 0
