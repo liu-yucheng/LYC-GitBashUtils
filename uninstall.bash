@@ -94,7 +94,7 @@ __cleanup_rc() {
         return 1
     fi
 
-    local source_pattern="source ~/\.bashrc # Install LYC-GitBashUtils"
+    local source_pattern="source ~/\.bash_profile # Install LYC-GitBashUtils"
 
     touch ~/.bashrc
     local rc=$(cat ~/.bashrc)
