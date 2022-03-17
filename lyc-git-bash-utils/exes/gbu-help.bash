@@ -9,7 +9,7 @@
 # GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/../libs/utils.bash

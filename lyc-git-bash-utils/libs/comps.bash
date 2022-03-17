@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Completion.
+# Completions.
 #
 # Can be run as an executable.
 # Provides command completion for the "gbu" command.
@@ -8,8 +8,11 @@
 # Copyright 2022 Yucheng Liu. GNU GPL3 license.
 # GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
 
+# Inclusion flag.
+_gbu_incl_libs_comps=1
+
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/utils.bash
@@ -21,7 +24,8 @@ if [[ -z $_gbu_incl_libs ]]; then
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
-__comp() {
+# Completes the "gbu" command.
+_gbu_comp() {
     if [[ $# -ne 0 ]]; then
         return 1
     fi
@@ -32,5 +36,3 @@ __comp() {
 
     complete -o default -W "$gbu_cmds" gbu
 }
-
-__comp

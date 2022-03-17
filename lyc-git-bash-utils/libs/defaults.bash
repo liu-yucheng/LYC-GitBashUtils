@@ -9,7 +9,7 @@
 _gbu_incl_libs_defaults=1
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/utils.bash
