@@ -9,4 +9,4 @@
 _gbu_incl_root=1
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)

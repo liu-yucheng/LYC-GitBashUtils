@@ -9,11 +9,11 @@
 _gbu_incl_tests=1
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_root ]]; then
     source $__dir/../__init__.bash
 fi
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
