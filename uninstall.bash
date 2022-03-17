@@ -15,7 +15,7 @@
 # GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/lyc-git-bash-utils/libs/utils.bash
@@ -37,14 +37,14 @@ __cleanup_profile() {
         return 1
     fi
 
-    local incl_pattern="export PATH=\".*\" # Install LYC-GitBashUtils"
-    local comp_pattern="source .* # Complete LYC-GitBashUtils \"gbu\" command"
+    local sec_start_pat="# - LYC-GitBashUtils ~/\.bash_profile installation section"
+    local sec_end_pat="# - End of LYC-GitBashUtils ~/\.bash_profile installation section"
 
     touch ~/.bash_profile
     local profile=$(cat ~/.bash_profile)
     local new_profile=""
-    local has_incl=0
-    local has_comp=0
+    local has_sec=0
+    local in_sec=0
 
     local ifs_backup=$IFS
     IFS=$'\n'
@@ -57,16 +57,17 @@ __cleanup_profile() {
             break
         fi
 
-        # Detect and remove the inclusion line
-        if [[ $line =~ $incl_pattern ]]; then
-            local has_incl=1
-            # echo matched # Debug
+        if [[ $line =~ $sec_start_pat ]]; then
+            local has_sec=1
+            local in_sec=1
+        fi
+
+        if [[ $line =~ $sec_end_pat ]]; then
+            local in_sec=0
             continue
         fi
 
-        # Detect and remove the completion line
-        if [[ $line =~ $comp_pattern ]]; then
-            local has_comp=1
+        if [[ $in_sec -ne 0 ]]; then
             continue
         fi
 
@@ -74,18 +75,13 @@ __cleanup_profile() {
     done <<<$profile
 
     IFS=$ifs_backup
+
     echo -ne "$new_profile" >|~/.bash_profile
 
-    if [[ $has_incl -eq 0 ]]; then
-        echo "Ensured removal of inclusion line in ~/.bash_profile"
+    if [[ $has_sec -eq 0 ]]; then
+        echo "Ensured removal of installation section in ~/.bash_profile"
     else
-        echo "Removed inclusion line from ~/.bash_profile"
-    fi
-
-    if [[ $has_comp -eq 0 ]]; then
-        echo "Ensured removal of completion line in ~/.bash_profile"
-    else
-        echo "Removed completion line from ~/.bash_profile"
+        echo "Removed installation section from ~/.bash_profile"
     fi
 }
 
@@ -94,12 +90,14 @@ __cleanup_rc() {
         return 1
     fi
 
-    local source_pattern="source ~/\.bash_profile # Install LYC-GitBashUtils"
+    local sec_start_pat="# - LYC-GitBashUtils ~/\.bashrc installation section"
+    local sec_end_pat="# - End of LYC-GitBashUtils ~/\.bashrc installation section"
 
     touch ~/.bashrc
     local rc=$(cat ~/.bashrc)
     local new_rc=""
-    local has_source=0
+    local has_sec=0
+    local in_sec=0
 
     local ifs_backup=$IFS
     IFS=$'\n'
@@ -112,9 +110,17 @@ __cleanup_rc() {
             break
         fi
 
-        # Detect and remove the inclusion line
-        if [[ $line =~ $source_pattern ]]; then
-            local has_source=1
+        if [[ $line =~ $sec_start_pat ]]; then
+            local has_sec=1
+            local in_sec=1
+        fi
+
+        if [[ $line =~ $sec_end_pat ]]; then
+            local in_sec=0
+            continue
+        fi
+
+        if [[ $in_sec -ne 0 ]]; then
             continue
         fi
 
@@ -122,12 +128,13 @@ __cleanup_rc() {
     done <<<$rc
 
     IFS=$ifs_backup
+
     echo -ne "$new_rc" >|~/.bashrc
 
-    if [[ $has_source -eq 0 ]]; then
-        echo "Ensured removal of source line in ~/.bashrc"
+    if [[ $has_sec -eq 0 ]]; then
+        echo "Ensured removal of installation section in ~/.bashrc"
     else
-        echo "Removed source line from ~/.bashrc"
+        echo "Removed installation section from ~/.bashrc"
     fi
 }
 

@@ -9,17 +9,17 @@
 _gbu_incl_libs_utils=1
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_libs ]]; then
     source $__dir/__init__.bash
 fi
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 # Meta-information ensuring eval line
 _gbu_ensure_metainfo_eval=" \
     __file=\$(realpath \${BASH_SOURCE[0]}); \
-    __dir=\$(dirname \${__file}) \
+    __dir=\$(dirname \$__file) \
 "

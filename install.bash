@@ -17,7 +17,7 @@
 # GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
 
 __file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname ${__file})
+__dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/lyc-git-bash-utils/libs/utils.bash
@@ -34,24 +34,58 @@ if [[ -z $_gbu_incl_libs_defaults ]]; then
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
+__utils_loc=$__dir/lyc-git-bash-utils/libs/utils.bash
+__comps_loc=$__dir/lyc-git-bash-utils/libs/comps.bash
+__incl_path=$__dir/lyc-git-bash-utils/path-includes
+
+__sec_content=$(
+cat << __eof
+__file=\$(realpath \${BASH_SOURCE[0]})
+__dir=\$(dirname \$__file)
+
+# include ".libs.utils"
+if [[ -z \$_gbu_incl_libs_utils ]]; then
+    source $__utils_loc
+    eval "\$_gbu_ensure_metainfo_eval"
+fi
+
+# include ".libs.comps"
+if [[ -z \$_gbu_incl_libs_comps ]]; then
+    source $__comps_loc
+    eval "\$_gbu_ensure_metainfo_eval"
+fi
+
+# Install to the PATH environment variable
+export PATH="\$PATH:$__incl_path"
+
+# Complete the "gbu" command
+_gbu_comp
+__eof
+)
+
 __ensure_profile() {
     if [[ $# -ne 0 ]]; then
         return 1
     fi
 
-    local incl_path=$__dir/lyc-git-bash-utils/path-includes
-    local incl="export PATH=\"\$PATH:$incl_path\" # Install LYC-GitBashUtils"
-    local incl_pattern="export PATH=\".*\" # Install LYC-GitBashUtils"
+    local sec=$(
+cat << __eof
+# - LYC-GitBashUtils ~/.bash_profile installation section
 
-    local comp_loc=$__dir/lyc-git-bash-utils/libs/comp.bash
-    local comp="source \"$comp_loc\" # Complete LYC-GitBashUtils \"gbu\" command"
-    local comp_pattern="source .* # Complete LYC-GitBashUtils \"gbu\" command"
+$__sec_content
+
+# - End of LYC-GitBashUtils ~/.bash_profile installation section
+__eof
+    )
+
+    local sec_start_pat="# - LYC-GitBashUtils ~/\.bash_profile installation section"
+    local sec_end_pat="# - End of LYC-GitBashUtils ~/\.bash_profile installation section"
 
     touch ~/.bash_profile
     local profile=$(cat ~/.bash_profile)
     local new_profile=""
-    local has_incl=0
-    local has_comp=0
+    local has_sec=0
+    local in_sec=0
 
     local ifs_backup=$IFS
     IFS=$'\n'
@@ -64,17 +98,18 @@ __ensure_profile() {
             break
         fi
 
-        # Detect and ensure the inclusion line
-        if [[ $line =~ $incl_pattern ]]; then
-            local has_incl=1
-            local line=$incl
-            # echo matched # Debug
+        if [[ $line =~ $sec_start_pat ]]; then
+            local has_sec=1
+            local in_sec=1
         fi
 
-        # Detect and ensure the completion line
-        if [[ $line =~ $comp_pattern ]]; then
-            local has_comp=1
-            local line=$comp
+        if [[ $line =~ $sec_end_pat ]]; then
+            local in_sec=0
+            continue
+        fi
+
+        if [[ $in_sec -ne 0 ]]; then
+            continue
         fi
 
         local new_profile="$new_profile$line\n"
@@ -82,28 +117,13 @@ __ensure_profile() {
 
     IFS=$ifs_backup
 
-    # Add the inclusion line if it does not exist
-    if [[ $has_incl -eq 0 ]]; then
-        local new_profile="$new_profile$incl\n"
-    fi
-
-    # Add the completion line if it does not exist
-    if [[ $has_comp -eq 0 ]]; then
-        local new_profile="$new_profile$comp\n"
-    fi
-
+    local new_profile="$new_profile$sec\n"
     echo -ne "$new_profile" >|~/.bash_profile
 
-    if [[ $has_incl -eq 0 ]]; then
-        echo "Added inclusion line to ~/.bash_profile"
+    if [[ $has_sec -eq 0 ]]; then
+        echo "Added installation section to ~/.bash_profile"
     else
-        echo "Ensured inclusion line in ~/.bash_profile"
-    fi
-
-    if [[ $has_comp -eq 0 ]]; then
-        echo "Added completion line to ~/.bash_profile"
-    else
-        echo "Ensured completion line in ~/.bash_profile"
+        echo "Ensured installation section in ~/.bash_profile"
     fi
 }
 
@@ -112,13 +132,24 @@ __ensure_rc() {
         return 1
     fi
 
-    local source="source ~/.bash_profile # Install LYC-GitBashUtils"
-    local source_pattern="source ~/\.bash_profile # Install LYC-GitBashUtils"
+    local sec=$(
+cat << __eof
+# - LYC-GitBashUtils ~/.bashrc installation section
+
+$__sec_content
+
+# - End of LYC-GitBashUtils ~/.bashrc installation section
+__eof
+    )
+
+    local sec_start_pat="# - LYC-GitBashUtils ~/\.bashrc installation section"
+    local sec_end_pat="# - End of LYC-GitBashUtils ~/\.bashrc installation section"
 
     touch ~/.bashrc
     local rc=$(cat ~/.bashrc)
     local new_rc=""
-    local has_source=0
+    local has_sec=0
+    local in_sec=0
 
     local ifs_backup=$IFS
     IFS=$'\n'
@@ -131,10 +162,18 @@ __ensure_rc() {
             break
         fi
 
-        # Detect and ensure the source line
-        if [[ $line =~ $source_pattern ]]; then
-            local has_source=1
-            local line=$source
+        if [[ $line =~ $sec_start_pat ]]; then
+            local has_sec=1
+            local in_sec=1
+        fi
+
+        if [[ $line =~ $sec_end_pat ]]; then
+            local in_sec=0
+            continue
+        fi
+
+        if [[ $in_sec -ne 0 ]]; then
+            continue
         fi
 
         local new_rc="$new_rc$line\n"
@@ -142,17 +181,13 @@ __ensure_rc() {
 
     IFS=$ifs_backup
 
-    # Adds the source line if it does not exist
-    if [[ $has_source -eq 0 ]]; then
-        local new_rc="$new_rc$source\n"
-    fi
-
+    local new_rc="$new_rc$sec\n"
     echo -ne "$new_rc" >|~/.bashrc
 
-    if [[ $has_source -eq 0 ]]; then
-        echo "Added source line to ~/.bashrc"
+    if [[ $has_sec -eq 0 ]]; then
+        echo "Added installation section to ~/.bashrc"
     else
-        echo "Ensured source line in ~/.bashrc"
+        echo "Ensured installation section in ~/.bashrc"
     fi
 }
 
