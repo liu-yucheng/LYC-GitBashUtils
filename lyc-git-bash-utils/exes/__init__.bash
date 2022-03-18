@@ -13,7 +13,6 @@ __dir=$(dirname $__file)
 
 if [[ -z $_gbu_incl_root ]]; then
     source $__dir/../__init__.bash
+    __file=$(realpath ${BASH_SOURCE[0]})
+    __dir=$(dirname $__file)
 fi
-
-__file=$(realpath ${BASH_SOURCE[0]})
-__dir=$(dirname $__file)

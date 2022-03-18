@@ -33,8 +33,8 @@ __main() {
     local info_fmt="LYC-GitBashUtils (%s) %s\n"
 
     if [[ $# -lt 0 ]]; then
-        printf "$few_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$few_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     elif [[ $# -eq 0 ]]; then
         printf "$info_fmt" "$_gbu_name" "$_gbu_ver"
@@ -157,12 +157,12 @@ __main() {
             local unknown_cmd_fmt="\"$brief_usage\" gets an unknown command: %s\n"
 
             if [[ ${1:0:1} == "-" ]]; then
-                printf "$unknown_arg_fmt" "$1" >|/dev/stderr
-                echo -e "$usage" >|/dev/stderr
+                printf "$unknown_arg_fmt" "$1" >>/dev/stderr
+                echo -e "$usage" >>/dev/stderr
                 exit 1
             else
-                printf "$unknown_cmd_fmt" "$1" >|/dev/stderr
-                echo -e "$usage" >|/dev/stderr
+                printf "$unknown_cmd_fmt" "$1" >>/dev/stderr
+                echo -e "$usage" >>/dev/stderr
                 exit 1
             fi
             ;;

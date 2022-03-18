@@ -36,8 +36,8 @@ __main() {
     local many_args_fmt="\"$brief_usage\" gets too many arguments\nExpects 1 arguments; Gets %s arguments\n"
 
     if [[ $# -lt 1 ]]; then
-        printf "$few_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$few_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     elif [[ $# -eq 1 ]]; then
         touch $_gbu_main_names_loc
@@ -95,8 +95,8 @@ __main() {
 
         exit 0
     else
-        printf "$many_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$many_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     fi
 }
