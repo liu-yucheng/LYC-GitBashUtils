@@ -19,7 +19,9 @@ __file=$(realpath ${BASH_SOURCE[0]})
 __dir=$(dirname $__file)
 
 # Meta-information ensuring eval line
-_gbu_ensure_metainfo_eval=" \
-    __file=\$(realpath \${BASH_SOURCE[0]}); \
-    __dir=\$(dirname \$__file) \
+_gbu_ensure_metainfo_eval="\
+\
+__file=\$(realpath \${BASH_SOURCE[0]});\
+__dir=\$(dirname \$__file)\
+\
 "
