@@ -41,6 +41,7 @@ __run_tests() {
     local test_idx=0
     local test_ttl="${#_gbu_blackbox_tests[@]}"
 
+    mkdir $__test_data_path 1>>/dev/null 2>>/dev/null
     touch $__failed_stderr_loc
 
     local start_time=$SECONDS
