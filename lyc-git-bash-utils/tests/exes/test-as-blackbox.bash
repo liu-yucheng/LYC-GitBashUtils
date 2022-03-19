@@ -34,6 +34,7 @@ __run_tests() {
         return 1
     fi
 
+    local start_time=$SECONDS
     local test_cnt=0
     local succ_cnt=0
     local fail_cnt=0
@@ -56,7 +57,9 @@ __run_tests() {
             fail_cnt=$(($fail_cnt + 1))
         fi
 
-        if [[ $((($tests_idx + 1) % 10 == 0 || $tests_idx + 1 == $tests_len)) ]]; then
+        if [[ 
+            $((($tests_idx + 1) % 60)) -eq 0 ||
+            $(($tests_idx + 1)) -eq $tests_len ]]; then
             echo -ne "\n"
         fi
 
@@ -65,9 +68,20 @@ __run_tests() {
 
     _gbu_tear_down_blackbox_tests
 
+    local end_time=$SECONDS
+    local taken_time_secs=$(($end_time - $start_time))
+
+    local taken_hrs=$(($taken_time_secs / 3600))
+
+    local taken_mins=$((($taken_time_secs / 60) - $taken_hrs * 60))
+    local taken_mins=$(printf "%02d" "$taken_mins")
+
+    local taken_secs=$(($taken_time_secs - $taken_mins * 60 - $taken_hrs * 3600))
+    local taken_secs=$(printf "%02d" "$taken_secs")
+
     local test_summ="\
 -
-Ran $test_cnt tests
+Ran $test_cnt tests  Time taken: $taken_hrs:$taken_mins:$taken_secs (hours: minutes: seconds)
 Successes: $succ_cnt  Failures: $fail_cnt
 "
 

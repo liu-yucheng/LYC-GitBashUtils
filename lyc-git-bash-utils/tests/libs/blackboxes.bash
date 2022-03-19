@@ -40,34 +40,6 @@ __test_stderr_loc=$__test_data_path/test-stderr.txt
 # "gbu" blackbox tests
 _gbu_blackbox_tests=(
     "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
-    "_gbu_test_gbu"
 )
 
 # Sets up the blackbox test environment.
@@ -110,7 +82,7 @@ _gbu_test_gbu() {
     local pwd_backup=$(pwd)
     cd $__test_repo_path 1>>/dev/null 2>>/dev/null
 
-    local cmd="gbu aba aba"
+    local cmd="gbu"
     echo "$cmd" >>$__test_stdin_loc
     $cmd 1>>$__test_stdout_loc 2>>$__test_stderr_loc
     local cmd_exit_code=$?
@@ -126,7 +98,8 @@ _gbu_test_gbu() {
         local fail_msg="\
 $test_name: failed
   running command \"$cmd\" results in exit code: $cmd_exit_code
-  however, the expected exit code is: 0"
+  however, the expected exit code is: 0
+"
 
         echo -ne "$fail_msg" >>/dev/stderr
         return 1
