@@ -73,8 +73,10 @@ __run_tests() {
         return 1
     fi
 
-    local start_time=$SECONDS
+    mkdir $__test_data_path 1>>/dev/null 2>>/dev/null
     touch $__failed_stderr_loc
+
+    local start_time=$SECONDS
 
     __run_blackbox_tests
 
