@@ -8,7 +8,7 @@
 # GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
 
 # Inclusion flag.
-_gbu_incl_tests_blackboxes=1
+_gbu_incl_tests_libs_blackboxes=1
 
 __file=$(realpath ${BASH_SOURCE[0]})
 __dir=$(dirname $__file)

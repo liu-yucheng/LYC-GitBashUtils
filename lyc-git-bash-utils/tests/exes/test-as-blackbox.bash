@@ -15,12 +15,12 @@ if [[ -z $_gbu_incl_libs_utils ]]; then
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
-if [[ -z $_gbu_incl_tests_libs ]]; then
+if [[ -z $_gbu_incl_tests_exes ]]; then
     source $__dir/__init__.bash
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
-if [[ -z $_gbu_incl_tests_blackboxes ]]; then
+if [[ -z $_gbu_incl_tests_libs_blackboxes ]]; then
     source $__dir/../libs/blackboxes.bash
     eval "$_gbu_ensure_metainfo_eval"
 fi
@@ -34,36 +34,39 @@ __run_tests() {
         return 1
     fi
 
-    local start_time=$SECONDS
     local test_cnt=0
     local succ_cnt=0
     local fail_cnt=0
-    local tests_idx=0
-    local tests_len="${#_gbu_blackbox_tests[@]}"
+
+    local test_idx=0
+    local test_ttl="${#_gbu_blackbox_tests[@]}"
+
     touch $__failed_stderr_loc
 
+    local start_time=$SECONDS
+    
     _gbu_setup_blackbox_tests
 
     for test_fn in "${_gbu_blackbox_tests[@]}"; do
         $test_fn 1>>/dev/null 2>>$__failed_stderr_loc
         local exit_code=$?
-        test_cnt=$(($test_cnt + 1))
+        local test_cnt=$(($test_cnt + 1))
 
         if [[ $exit_code -eq 0 ]]; then
             echo -ne "."
-            succ_cnt=$(($succ_cnt + 1))
+            local succ_cnt=$(($succ_cnt + 1))
         else
             echo -ne "F"
-            fail_cnt=$(($fail_cnt + 1))
+            local fail_cnt=$(($fail_cnt + 1))
         fi
 
         if [[ 
-            $((($tests_idx + 1) % 60)) -eq 0 ||
-            $(($tests_idx + 1)) -eq $tests_len ]]; then
+            $((($test_idx + 1) % 60)) -eq 0 ||
+            $(($test_idx + 1)) -eq $test_ttl ]]; then
             echo -ne "\n"
         fi
 
-        tests_idx=$(($tests_idx + 1))
+        local test_idx=$(($test_idx + 1))
     done
 
     _gbu_tear_down_blackbox_tests
