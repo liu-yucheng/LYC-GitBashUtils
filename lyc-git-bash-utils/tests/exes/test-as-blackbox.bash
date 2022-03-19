@@ -56,7 +56,7 @@ __run_tests() {
             fail_cnt=$(($fail_cnt + 1))
         fi
 
-        if [[ $tests_idx -eq $(($tests_len - 1)) ]]; then
+        if [[ $((($tests_idx + 1) % 10 == 0 || $tests_idx + 1 == $tests_len)) ]]; then
             echo -ne "\n"
         fi
 
