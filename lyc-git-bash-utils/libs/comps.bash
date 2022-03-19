@@ -24,15 +24,13 @@ if [[ -z $_gbu_incl_libs ]]; then
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
-# Completes the "gbu" command.
-_gbu_comp() {
-    if [[ $# -ne 0 ]]; then
-        return 1
-    fi
+# "gbu" commands.
+_gbu_cmds=\
+"
+clear-main-names create-dev create-rel dev-merge-rel help info init-repo list-main-names list-user-info
+main-merge-rel merge-dev-updates merge-rel-updates pull-updates push-updates rel-merge-dev set-main-name
+set-user-info show-graph tag-main update-feature update-patch
+"
 
-    local gbu_cmds="clear-main-names create-dev create-rel dev-merge-rel help info init-repo list-main-names \
-        list-user-info main-merge-rel merge-dev-updates merge-rel-updates pull-updates push-updates rel-merge-dev \
-        set-main-name set-user-info show-graph tag-main update-feature update-patch"
-
-    complete -o default -W "$gbu_cmds" gbu
-}
+# "gbu" completion command.
+_gbu_comp_cmd="complete -o default -W \"$_gbu_cmds\" gbu"

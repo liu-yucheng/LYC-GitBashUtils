@@ -23,7 +23,7 @@ if [[ -z $_gbu_incl_tests_libs ]]; then
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
-__repo_path=$(realpath $__dir/../../../)
+__repo_path=$(realpath $__dir/../../..)
 # echo $__repo_path # Debug
 
 # Default test data path.
@@ -37,43 +37,43 @@ __test_stdin_loc=$__test_data_path/test-stdin.txt
 __test_stdout_loc=$__test_data_path/test-stdout.txt
 __test_stderr_loc=$__test_data_path/test-stderr.txt
 
-# Test names.
-_gbu_tests_blackboxes_test_names=(
-    "_gbu_tests_blackboxes_test_gbu"
+# "gbu" blackbox tests
+_gbu_blackbox_tests=(
+    "_gbu_test_gbu"
 )
 
-# Sets up the test environment.
-_gbu_tests_blackboxes_setup() {
+# Sets up the blackbox test environment.
+_gbu_setup_blackbox_tests() {
     if [[ $# -ne 0 ]]; then
         return 1
     fi
 
     mkdir $__test_data_path 1>>/dev/null 2>>/dev/null
 
-    rm -r $__test_repo_path 1>>/dev/null 2>>/dev/null
-    cp -r $__dft_test_repo_path $__test_repo_path 1>>/dev/null 2>>/dev/null
+    rm -rf $__test_repo_path 1>>/dev/null 2>>/dev/null
+    cp -rf $__dft_test_repo_path $__test_repo_path 1>>/dev/null 2>>/dev/null
 
     touch $__test_stdin_loc 1>>/dev/null 2>>/dev/null
     touch $__test_stdout_loc 1>>/dev/null 2>>/dev/null
     touch $__test_stderr_loc 1>>/dev/null 2>>/dev/null
 }
 
-# Tears down the test environment.
-_gbu_tests_blackboxes_tear_down() {
+# Tears down the blackbox test environment.
+_gbu_tear_down_blackbox_tests() {
     if [[ $# -ne 0 ]]; then
         return 1
     fi
 
-    rm -r $__test_repo_path 1>>/dev/null 2>>/dev/null
+    rm -rf $__test_repo_path 1>>/dev/null 2>>/dev/null
 }
 
 # Tests the gbu command.
-_gbu_tests_blackboxes_test_gbu() {
+_gbu_test_gbu() {
     if [[ $# -ne 0 ]]; then
         return 1
     fi
 
-    local test_name="_gbu_tests_blackboxes_test_gbu"
+    local test_name="_gbu_test_gbu"
     local header="- $test_name\n\n"
     echo -ne "$header" >>$__test_stdin_loc
     echo -ne "$header" >>$__test_stdout_loc
@@ -96,12 +96,13 @@ _gbu_tests_blackboxes_test_gbu() {
 
     if [[ $cmd_exit_code -ne 0 ]]; then
         local fail_msg="\
-\
-$test_name: failed\n\
-  running command \"$cmd\" results in exit code: $cmd_exit_code\n\
-  however, the expected exit code is: 0\n\
-\
-        "
+$test_name: failed
+  running command \"$cmd\" results in exit code: $cmd_exit_code
+  however, the expected exit code is: 0"
+
         echo -ne "$fail_msg" >>/dev/stderr
+        return 1
+    else
+        return 0
     fi
 }
