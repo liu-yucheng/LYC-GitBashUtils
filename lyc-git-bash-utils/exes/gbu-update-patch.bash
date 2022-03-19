@@ -36,8 +36,8 @@ __main() {
     # declare -p arg_list # Debug
 
     if [[ $# -lt 2 ]]; then
-        printf "$few_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$few_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     elif [[ $# -eq 2 ]]; then
         (
@@ -57,8 +57,8 @@ __main() {
 
         exit 0
     else
-        printf "$many_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$many_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     fi
 }

@@ -34,32 +34,22 @@ if [[ -z $_gbu_incl_libs_defaults ]]; then
     eval "$_gbu_ensure_metainfo_eval"
 fi
 
+if [[ -z $_gbu_incl_libs_comps ]]; then
+    source $__dir/lyc-git-bash-utils/libs/comps.bash
+    eval "$_gbu_ensure_metainfo_eval"
+fi
+
 __utils_loc=$__dir/lyc-git-bash-utils/libs/utils.bash
 __comps_loc=$__dir/lyc-git-bash-utils/libs/comps.bash
 __incl_path=$__dir/lyc-git-bash-utils/path-includes
 
 __sec_content=$(
 cat << __eof
-__file=\$(realpath \${BASH_SOURCE[0]})
-__dir=\$(dirname \$__file)
-
-# include ".libs.utils"
-if [[ -z \$_gbu_incl_libs_utils ]]; then
-    source $__utils_loc
-    eval "\$_gbu_ensure_metainfo_eval"
-fi
-
-# include ".libs.comps"
-if [[ -z \$_gbu_incl_libs_comps ]]; then
-    source $__comps_loc
-    eval "\$_gbu_ensure_metainfo_eval"
-fi
-
 # Install to the PATH environment variable
 export PATH="\$PATH:$__incl_path"
 
 # Complete the "gbu" command
-_gbu_comp
+$_gbu_comp_cmd
 __eof
 )
 
@@ -240,16 +230,16 @@ __main() {
     local many_args_fmt="\"$brief_usage\" gets too many arguments\nExpects 0 arguments; Gets %s arguments\n"
 
     if [[ $# -lt 0 ]]; then
-        printf "$few_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$few_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     elif [[ $# -eq 0 ]]; then
         __install
         printf "$info_fmt" "$_gbu_name" "$_gbu_ver"
         exit 0
     else
-        printf "$many_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$many_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     fi
 }

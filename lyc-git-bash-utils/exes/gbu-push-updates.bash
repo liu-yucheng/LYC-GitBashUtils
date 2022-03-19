@@ -28,8 +28,8 @@ __main() {
         \n"
 
     if [[ $# -lt 0 ]]; then
-        printf "$few_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$few_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     elif [[ $# -ge 0 && $# -le 1 ]]; then
         local remote_name=origin
@@ -47,8 +47,8 @@ __main() {
 
         exit 0
     else # elif [[ $# -gt 1 ]]; then
-        printf "$many_args_fmt" "$#" >|/dev/stderr
-        echo -e "$usage" >|/dev/stderr
+        printf "$many_args_fmt" "$#" >>/dev/stderr
+        echo -e "$usage" >>/dev/stderr
         exit 1
     fi
 }
