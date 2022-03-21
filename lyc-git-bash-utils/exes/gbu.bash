@@ -11,6 +11,7 @@
 __file=$(realpath ${BASH_SOURCE[0]})
 __dir=$(dirname $__file)
 
+# include lyc-git-bash-utils.libs.utils
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/../libs/utils.bash
     eval "$_gbu_ensure_metainfo_eval"
@@ -50,107 +51,107 @@ __main() {
         clear-main-names)
             # echo "subcommand clear-main-names" # Debug
             $__dir/gbu-clear-main-names.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         create-dev)
             # echo "subcommand create-dev" # Debug
             $__dir/gbu-create-dev.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         create-rel)
             # echo "subcommand create-rel" # Debug
             $__dir/gbu-create-rel.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         dev-merge-rel)
             # echo "subcommand dev-merge-rel" # Debug
             $__dir/gbu-dev-merge-rel.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         help)
             # echo "subcommand help" # Debug
             $__dir/gbu-help.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         info)
             # echo "subcommand info" # Debug
             $__dir/gbu-info.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         init-repo)
             # echo "subcommand init-repo" # Debug
             $__dir/gbu-init-repo.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         list-main-names)
             # echo "subcommand list-main-names" # Debug
             $__dir/gbu-list-main-names.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         list-user-info)
             # echo "subcommand list-user-info" # Debug
             $__dir/gbu-list-user-info.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         main-merge-rel)
             # echo "subcommand main-merge-rel" # Debug
             $__dir/gbu-main-merge-rel.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         merge-dev-updates)
             # echo "subcommand merge-dev-updates" # Debug
             $__dir/gbu-merge-dev-updates.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         merge-rel-updates)
             # echo "subcommand merge-rel-updates" # Debug
             $__dir/gbu-merge-rel-updates.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         pull-updates)
             # echo "subcommand pull-updates" # Debug
             $__dir/gbu-pull-updates.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         push-updates)
             # echo "subcommand push-updates" # Debug
             $__dir/gbu-push-updates.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         rel-merge-dev)
             # echo "subcommand rel-merge-dev" # Debug
             $__dir/gbu-rel-merge-dev.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         set-main-name)
             # echo "subcommand set-main-name" # Debug
             $__dir/gbu-set-main-name.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         set-user-info)
             # echo "subcommand set-user-info" # Debug
             $__dir/gbu-set-user-info.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         show-graph)
             # echo "subcommand show-graph" # Debug
             $__dir/gbu-show-graph.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         tag-main)
             # echo "subcommand tag-main" # Debug
             $__dir/gbu-tag-main.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         update-feature)
             # echo "subcommand update-feature" # Debug
             $__dir/gbu-update-feature.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         update-patch)
             # echo "subcommand update-patch" # Debug
             $__dir/gbu-update-patch.bash "${subcmd_arg_list[@]}"
-            exit 0
+            exit $?
             ;;
         *)
             local unknown_arg_fmt="\"$brief_usage\" gets an unknown argument: %s\n"
