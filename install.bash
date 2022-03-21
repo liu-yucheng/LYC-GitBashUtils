@@ -19,6 +19,7 @@
 __file=$(realpath ${BASH_SOURCE[0]})
 __dir=$(dirname $__file)
 
+# include lyc-git-bash-utils.libs.utils
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/lyc-git-bash-utils/libs/utils.bash
     eval "$_gbu_ensure_metainfo_eval"

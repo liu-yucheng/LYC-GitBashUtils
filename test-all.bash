@@ -8,6 +8,7 @@
 __file=$(realpath ${BASH_SOURCE[0]})
 __dir=$(dirname $__file)
 
+# include lyc-git-bash-utils.libs.utils
 if [[ -z $_gbu_incl_libs_utils ]]; then
     source $__dir/lyc-git-bash-utils/libs/utils.bash
     eval "$_gbu_ensure_metainfo_eval"
@@ -99,7 +100,7 @@ Successes: $__succ_cnt  Failures: $__fail_cnt
 
     echo -ne "$test_summ"
 
-    if [[ $fail_cnt -gt 0 ]]; then
+    if [[ $__fail_cnt -gt 0 ]]; then
         local details=$(cat $__failed_stderr_loc)
 
         local fail_details="\
