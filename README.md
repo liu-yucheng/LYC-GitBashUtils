@@ -28,6 +28,7 @@ I recommend you to **run and check `git status` and `git log`** before running c
 # Installation
 
 - Download the source code.
+- Ensure that `bash` and `git` are ready.
 - Install the application. (Optional. See below.)
 - Run the application in the following ways.
 
@@ -139,6 +140,29 @@ pull-updates:
     When:   You need to pull the updates from a remote repository.
     How-to: gbu pull-updates [<optional-remote>]
 ```
+
+# Dependencies
+
+The list of dependencies can be found in `<this-repo>/dependencies.txt`.
+
+- `bash`
+- `git`
+
+# Testing
+
+After installation, you can test this application by running `<this-repo>/test-all.bash`.
+
+If you see some terminal outputs in the following form, then go on and enjoy the application.
+
+```bash
+$ ./test-all.bash
+............ ...
+-
+Ran <test-count> tests  Time taken: H:MM:SS (hours: minutes: seconds)
+Successes: <test-count>  Failures: 0
+```
+
+Otherwise, you are welcomed to start some issues in or send some pull requests to this repository.
 
 # Miscellaneous
 ## Developer's Notes :memo: And Warnings :warning:
