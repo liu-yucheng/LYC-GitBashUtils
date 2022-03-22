@@ -45,6 +45,9 @@ __main_names_backup_loc=$__test_data_path/main-branch-names-backup.txt
 __user_name_backup_loc=$__test_data_path/user-name-backup.txt
 __user_email_backup_loc=$__test_data_path/user-email-backup.txt
 
+__test_local_path=$__test_data_path/test-local-repo
+__test_remote_path=$__test_data_path/test-remote-repo
+
 # "gbu" blackbox tests
 _gbu_blackbox_tests=(
     "_gbu_test_gbu"
@@ -62,6 +65,21 @@ _gbu_blackbox_tests=(
     "_gbu_test_create_rel"
 
     "_gbu_test_show_graph"
+
+    "_gbu_test_update_feature"
+    "_gbu_test_update_patch"
+
+    "_gbu_test_rel_merge_dev"
+    "_gbu_test_main_merge_rel"
+    "_gbu_test_dev_merge_rel"
+
+    "_gbu_test_merge_dev_updates"
+    "_gbu_test_merge_rel_updates"
+
+    "_gbu_test_tag_main"
+
+    "_gbu_test_pull_updates"
+    "_gbu_test_push_updates"
 )
 
 # Sets up the blackbox test environment.
@@ -243,8 +261,8 @@ _gbu_test_set_user_info() {
     local user_name=$(cat $__user_name_backup_loc)
     local user_email=$(cat $__user_email_backup_loc)
 
-    git config --global --get-all user.name $user_name
-    git config --global --get-all user.email $user_email
+    git config --global --replace-all user.name $user_name
+    git config --global --replace-all user.email $user_email
 
     rm -f $__user_name_backup_loc 1>>/dev/null 2>>/dev/null
     rm -f $__user_email_backup_loc 1>>/dev/null 2>>/dev/null
@@ -325,6 +343,11 @@ __test_cmds() {
         eval "$cmd 1>>$__test_stdout_loc 2>>$__test_stderr_loc"
         local exit_code=$?
         exit_codes[$idx]=$exit_code
+
+        if [[ $idx -lt $((${#cmds[@]} - 1)) ]]; then
+            echo -e "# -" >>$__test_stdout_loc
+            echo -e "# -" >>$__test_stderr_loc
+        fi
     done
 
     cd $pwd_backup 1>>/dev/null 2>>/dev/null
@@ -370,5 +393,361 @@ _gbu_test_show_graph() {
     local cmds_len=${#cmds[@]}
     __test_cmds "_gbu_test_show_graph" $cmds_len "${cmds[@]}"
     local exit_code=$?
+    return $exit_code
+}
+
+# -
+
+# Tests the "gbu update-feature" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+_gbu_test_update_feature() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing update-feature\" >>$__test_repo_path/README.md; # "
+
+        "gbu update-feature fb_test_update_feature \"Tested update-feature\""
+
+        "git checkout rel"
+        "git merge dev --no-ff -m \"rel merged dev\""
+        "git checkout main"
+        "git merge rel --no-ff -m \"main merged rel\""
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_update_feature" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# Tests the "gbu update-patch" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+_gbu_test_update_patch() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing update-patch\" >>$__test_repo_path/README.md; # "
+
+        "gbu update-patch pb_test_update_patch \"Tested update-patch\""
+
+        "git checkout dev"
+        "git merge rel --no-ff -m \"dev merged rel\""
+        "git checkout main"
+        "git merge rel --no-ff -m \"main merged rel\""
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_update_patch" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# -
+
+# Tests the "gbu rel-merge-dev" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+# Depends on "gbu update-feature ..."
+_gbu_test_rel_merge_dev() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing rel-merge-dev\" >>$__test_repo_path/README.md; # "
+        "gbu update-feature fb_test_rel_merge_dev \"Tested rel-merge-dev\""
+
+        "gbu rel-merge-dev"
+
+        "git checkout main"
+        "git merge rel --no-ff -m \"main merged rel\""
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_rel_merge_dev" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# Tests the "gbu main-merge-rel" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+# Depends on "gbu update-patch ..."
+_gbu_test_main_merge_rel() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing main-mrege-rel\" >>$__test_repo_path/README.md; # "
+        "gbu update-patch pb_test_main_merge_rel \"Tested main-merge-rel\""
+
+        "gbu main-merge-rel"
+
+        "git checkout dev"
+        "git merge rel --no-ff -m \"dev merged rel\""
+        "git checkout main"
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_main_merge_rel" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# Tests the "gbu dev-merge-rel" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+# Depends on "gbu update-patch ..."
+_gbu_test_dev_merge_rel() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing dev-mrege-rel\" >>$__test_repo_path/README.md; # "
+        "gbu update-patch pb_test_dev_merge_rel \"Tested dev-merge-rel\""
+
+        "gbu dev-merge-rel"
+
+        "git checkout main"
+        "git merge rel --no-ff -m \"main merged rel\""
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_dev_merge_rel" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# -
+
+# Tests the "gbu merge-dev-updates" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+# Depends on "gbu update-feature ..."
+_gbu_test_merge_dev_updates() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing merge-dev-updates\" >>$__test_repo_path/README.md; # "
+        "gbu update-feature fb_test_merge_dev_updates \"Tested merge-dev-updates\""
+
+        "gbu merge-dev-updates"
+
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_merge_dev_updates" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# Tests the "gbu merge-rel-updates" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+# Depends on "gbu update-patch ..."
+_gbu_test_merge_rel_updates() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "echo \"Testing merge-rel-updates\" >>$__test_repo_path/README.md; # "
+        "gbu update-patch fb_test_merge_rel_updates \"Tested merge-rel-updates\""
+
+        "gbu merge-rel-updates"
+
+        "cat $__test_repo_path/README.md"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_merge_rel_updates" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# -
+
+# Tests the "gbu tag-main" command.
+#
+# Depends on "gbu init-repo."
+# Depends on "gbu merge-dev-updates."
+# Depends on "gbu merge-rel-updates."
+_gbu_test_tag_main() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    local cmds=(
+        "gbu init-repo"
+        "gbu merge-dev-updates"
+        "gbu merge-rel-updates"
+
+        "gbu tag-main v0.1.0"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_tag_main" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+    return $exit_code
+}
+
+# -
+
+# Tests the "gbu pull-updates" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+_gbu_test_pull_updates() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+    mkdir $__test_local_path 1>>/dev/null 2>>/dev/null
+
+    local cmds=(
+        "gbu set-main-name main"
+        "gbu init-repo"
+        "cd $__test_local_path"
+        "git init"
+        "git remote add origin file://$__test_repo_path"
+
+        "gbu pull-updates"
+
+        "git reset --hard HEAD"
+        "cat $__test_local_path/README.md"
+        "cd $__test_repo_path"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_pull_updates" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+    rm -rf $__test_local_path 1>>/dev/null 2>>/dev/null
+
+    return $exit_code
+}
+
+# Tests the "gbu push-updates" command.
+#
+# Depends on "gbu set-main-name ..."
+# Depends on "gbu init-repo."
+_gbu_test_push_updates() {
+    if [[ $# -ne 0 ]]; then
+        return 1
+    fi
+
+    cat $__main_names_loc >|$__main_names_backup_loc
+    mkdir $__test_remote_path 1>>/dev/null 2>>/dev/null
+
+    local cmds=(
+        "gbu set-main-name main"
+        "cd $__test_remote_path"
+        "git init"
+        "mv $__test_remote_path/.git/* $__test_remote_path"
+        "rm -rf $__test_remote_path/.git"
+        "git config --bool core.bare true"
+        "cd $__test_repo_path"
+        "gbu init-repo"
+        "git remote add origin file://$__test_remote_path"
+
+        "gbu push-updates"
+
+        "git clone file://$__test_remote_path $__test_local_path"
+        "cd $__test_local_path"
+        "cat $__test_local_path/README.md"
+        "cd $__test_repo_path"
+    )
+
+    local cmds_len=${#cmds[@]}
+    __test_cmds "_gbu_test_push_updates" $cmds_len "${cmds[@]}"
+    local exit_code=$?
+
+    cat $__main_names_backup_loc >|$__main_names_loc
+    rm -f $__main_names_backup_loc 1>>/dev/null 2>>/dev/null
+    rm -rf $__test_remote_path 1>>/dev/null 2>>/dev/null
+    rm -rf $__test_local_path 1>>/dev/null 2>>/dev/null
+
     return $exit_code
 }
