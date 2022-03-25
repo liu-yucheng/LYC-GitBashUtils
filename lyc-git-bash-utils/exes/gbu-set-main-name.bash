@@ -83,13 +83,17 @@ __main() {
             )
         fi
 
-        echo "New default branch name: ${main_names[0]}"
+        local main_name=${main_names[0]}
+        echo "New default branch name: $main_name"
         printf "%s\n" "${main_names[@]}" >|$_gbu_main_names_loc
 
         (
             set -o xtrace # Turn command tracing on
 
             cat $_gbu_main_names_loc
+            git config --global --get-all init.defaultBranch
+            git config --global --replace-all init.defaultBranch "$main_name"
+            git config --global --get-all init.defaultBranch
             git branch
         )
 
