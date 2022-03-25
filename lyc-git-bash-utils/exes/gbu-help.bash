@@ -43,13 +43,13 @@ info:
     When:   You need too see the package info.
     How-to: gbu info
 list-main-names:
-    When:   You need to list the main branch name settings
+    When:   You need to list git and gbu main branch name settings.
     How-to: gbu list-main-names
 clear-main-names:
-    When:   You need to restore the default main branch name settings.
+    When:   You need to restore the default git and gbu main branch name settings.
     How-to: gbu clear-main-names
 set-main-name:
-    When:   You need to update the main branch name settings.
+    When:   You need to update git and gbu main branch name settings.
     How-to: gbu set-main-name <new-main-name>
 list-user-info:
     When:   You need to list the git user info.

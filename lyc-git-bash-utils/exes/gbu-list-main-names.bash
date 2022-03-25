@@ -44,6 +44,7 @@ __main() {
             set -o xtrace # Turn command tracing on
 
             cat $_gbu_main_names_loc
+            git config --global --get-all init.defaultBranch
             git branch
         )
 
