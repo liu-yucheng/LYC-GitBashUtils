@@ -688,12 +688,12 @@ _gbu_test_pull_updates() {
         "gbu set-main-name main"
         "gbu init-repo"
         "cd $__test_local_path"
-        "git init"
+        "gbu init-repo"
         "git remote add origin file://$__test_repo_path"
 
         "gbu pull-updates"
 
-        "git reset --hard HEAD"
+        "git reset --hard main"
         "cat $__test_local_path/README.md"
         "cd $__test_repo_path"
     )
@@ -724,7 +724,7 @@ _gbu_test_push_updates() {
     local cmds=(
         "gbu set-main-name main"
         "cd $__test_remote_path"
-        "git init"
+        "gbu init-repo"
         "mv $__test_remote_path/.git/* $__test_remote_path"
         "rm -rf $__test_remote_path/.git"
         "git config --bool core.bare true"
