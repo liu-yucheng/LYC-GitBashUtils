@@ -41,7 +41,7 @@ __main() {
         (
             set -o xtrace # Turn command tracing on
 
-            git pull --no-edit --autostash $remote_name "*:*"
+            git pull --no-edit --no-ff --rebase=true --autostash --force $remote_name "*:*"
         )
 
         exit 0
