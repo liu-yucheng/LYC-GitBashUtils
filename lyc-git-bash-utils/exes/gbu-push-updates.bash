@@ -41,8 +41,8 @@ __main() {
         (
             set -o xtrace # Turn command tracing on
 
-            git push --all $remote_name
-            git push --tags $remote_name
+            git push --all --force --set-upstream $remote_name
+            git push --tags --force --set-upstream $remote_name
         )
 
         exit 0
