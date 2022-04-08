@@ -83,13 +83,13 @@ info:
     When:   You need too see the package info.
     How-to: gbu info
 list-main-names:
-    When:   You need to list the main branch name settings
+    When:   You need to list git and gbu main branch name settings.
     How-to: gbu list-main-names
 clear-main-names:
-    When:   You need to restore the default main branch name settings.
+    When:   You need to restore the default git and gbu main branch name settings.
     How-to: gbu clear-main-names
 set-main-name:
-    When:   You need to update the main branch name settings.
+    When:   You need to update git and gbu main branch name settings.
     How-to: gbu set-main-name <new-main-name>
 list-user-info:
     When:   You need to list the git user info.
@@ -171,9 +171,10 @@ Otherwise, you are welcomed to start some issues in or send some pull requests t
 This application is distributed under the **GNU GPL3 license**.
 
 A subsequent work of this application is a work that satisfies **any one** of the following:
-   - Is a variant of any form of this application.
-   - Contains a part, some parts, or all parts of this application.
-   - Integrates a part, some parts, or all parts of this application.
+
+- Is a variant of any form of this application.
+- Contains a part, some parts, or all parts of this application.
+- Integrates a part, some parts, or all parts of this application.
 
 All subsequent works of this application **must also be distributed under the GNU GPL3 license, and must also open their source codes to the public**.
 
@@ -251,6 +252,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT
 You should have received a copy of the GNU General Public License along with
   this program. If not, see:
   1. The LICENSE file in this repository.
-  2. https://www.gnu.org/licenses/.
+  2. https://www.gnu.org/licenses/#GPL.
   3. https://www.gnu.org/licenses/gpl-3.0.txt.
 ```
