@@ -41,8 +41,9 @@ __main() {
 LYC-GitBashUtils package info\n\
 Package name:   $_gbu_name\n\
 Version:        $_gbu_ver\n\
-Description:    $_gbu_desc\n\
-Author:         $_gbu_author"
+Author:         $_gbu_author\n\
+Copyright:      $_gbu_cr\n\
+Description:    $_gbu_desc"
 
         echo -e "$info"
         exit 0
