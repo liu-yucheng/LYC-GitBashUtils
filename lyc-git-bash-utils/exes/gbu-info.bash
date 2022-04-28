@@ -38,12 +38,12 @@ __main() {
         exit 1
     elif [[ $# -eq 0 ]]; then
         local info="\
-LYC-GitBashUtils package info\n\
-Package name:   $_gbu_name\n\
-Version:        $_gbu_ver\n\
-Author:         $_gbu_author\n\
-Copyright:      $_gbu_cr\n\
-Description:    $_gbu_desc"
+LYC-GitBashUtils package info:\n\
+    Package name:   $_gbu_name\n\
+    Version:        $_gbu_ver\n\
+    Author:         $_gbu_author\n\
+    Copyright:      $_gbu_cr\n\
+    Description:    $_gbu_desc"
 
         echo -e "$info"
         exit 0
