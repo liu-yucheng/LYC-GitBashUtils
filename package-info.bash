@@ -11,7 +11,7 @@ _gbu_incl_package_info=1
 # Package name.
 _gbu_name=lyc-git-bash-utils
 # Version.
-_gbu_ver=1.0.4
+_gbu_ver=1.0.5
 # Author.
 _gbu_author="Yucheng Liu"
 # Copyright.
