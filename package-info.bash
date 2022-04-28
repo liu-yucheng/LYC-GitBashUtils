@@ -8,11 +8,13 @@
 # Inclusion flag.
 _gbu_incl_package_info=1
 
-# Name.
+# Package name.
 _gbu_name=lyc-git-bash-utils
 # Version.
-_gbu_ver=1.0.3
-# Description.
-_gbu_desc="LYC's personal Git Bash utility application."
+_gbu_ver=1.0.4
 # Author.
 _gbu_author="Yucheng Liu"
+# Copyright.
+_gbu_cr="Copyright (C) 2022 Yucheng Liu. GNU GPL3 license."
+# Description.
+_gbu_desc="LYC's personal Git Bash utility application."
