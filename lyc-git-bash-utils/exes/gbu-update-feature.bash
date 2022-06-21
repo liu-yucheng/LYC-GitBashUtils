@@ -29,8 +29,9 @@ fi
 
 __main() {
     local brief_usage="gbu update-feature <feature-branch-name> <feature-commit-message>"
+    local aliases="update-dev-feature"
     local few_args_fmt="\"$brief_usage\" gets too few arguments\nExpects 2 arguments; Gets %s arguments\n"
-    local usage="Usage: $brief_usage\nHelp: gbu help"
+    local usage="Usage: $brief_usage\nAliases: $aliases\nHelp: gbu help"
     local many_args_fmt="\"$brief_usage\" gets too many arguments\nExpects 2 arguments; Gets %s arguments\n"
 
     # local arg_list=("${@}") # Debug
