@@ -143,12 +143,12 @@ __main() {
             $__dir/gbu-tag-main.bash "${subcmd_arg_list[@]}"
             exit $?
             ;;
-        update-feature)
+        update-feature | update-dev-feature)
             # echo "subcommand update-feature" # Debug
             $__dir/gbu-update-feature.bash "${subcmd_arg_list[@]}"
             exit $?
             ;;
-        update-patch)
+        update-patch | update-rel-patch)
             # echo "subcommand update-patch" # Debug
             $__dir/gbu-update-patch.bash "${subcmd_arg_list[@]}"
             exit $?

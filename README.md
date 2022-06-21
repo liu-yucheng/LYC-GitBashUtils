@@ -115,12 +115,14 @@ dev-merge-rel:
 update-feature:
     When:   You need to update a feature with a feature branch.
     How-to: gbu update-feature <feature-branch-name> <feature-commit-message>
+    Aliases: update-dev-feature
 rel-merge-dev:
     When:   You need the rel branch to merge the dev branch.
     How-to: gbu rel-merge-dev
 update-patch:
     When:   You need to update a patch with a patch branch.
     How-to: gbu update-patch <patch-branch-name> <patch-commit-message>
+    Aliases: update-rel-patch
 main-merge-rel:
     When:   You need the main branch to merge the rel branch.
     How-to: gbu main-merge-rel
