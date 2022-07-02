@@ -66,7 +66,7 @@ __main() {
             set -o xtrace # Turn command tracing on
 
             git checkout $main_name
-            git tag $1
+            git tag $1 $main_name # Commit the latest commit of the main branch
             git checkout rel
             git branch
         )
