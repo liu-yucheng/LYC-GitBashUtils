@@ -2,8 +2,8 @@
 
 # Tests.
 
-# Copyright 2022 Yucheng Liu. GNU GPL3 license.
-# GNU GPL3 license copy: https://www.gnu.org/licenses/gpl-3.0.txt
+# Copyright 2022-2025 Yucheng Liu. Under the GNU AGPL 3.0 license.
+# GNU AGPL 3.0 license: https://www.gnu.org/licenses/agpl-3.0.txt .
 
 # Inclusion flag
 _gbu_incl_tests=1
