@@ -42,8 +42,8 @@ __main() {
         (
             set -o xtrace # Turn command tracing on
 
-            git pull --no-edit --no-ff --autostash --force $remote_name "*:*"
             git submodule update --init --recursive --remote
+            git pull --no-edit --no-ff --autostash --force $remote_name "*:*"
         )
 
         exit 0
